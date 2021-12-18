@@ -1,9 +1,9 @@
 use std::fs;
 use actix_web::client::Client;
 use actix_web::web::Json;
-use serde::Deserialize;
+use serde::{Serialize, Deserialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 struct FileList {
     file_names: Vec<String>
 }
