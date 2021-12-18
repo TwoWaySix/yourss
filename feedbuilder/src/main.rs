@@ -1,10 +1,22 @@
 use std::fs;
+use actix_web::client::Client;
 
-fn main() {
+#[actix_web::main]
+async fn main() {
     let feed_template_path = "./templates/feed_template.xml".to_string();
     let host_url = "http://192.168.178.10:8765".to_string();
 
     let rss_feed = create_rss_feed(&host_url, &feed_template_path);
+
+    let mut client = Client::default();
+    let response = client.get(format!("{}/mp3_files", host_url))
+        .header("User-Agent", "actix-web/3.0")
+        .send()
+        .await;
+
+    let body = response.unwrap().body().await.unwrap();
+    let body_str = format!("{:?}", body);
+    println!("Response: {:?}", body_str);
 
     // TODO: Replace previous feed.xml
 }
