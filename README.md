@@ -1,2 +1,2 @@
-# hosterrs
-A self hosted Apple Podcast RSS hoster with download features.
+# YouRSS
+A self hosted Podcast RSS builder and hoster with a frontend that allows users to extract audio from YouTube videos.
