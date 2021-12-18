@@ -1,6 +1,6 @@
 use std::fs;
 use actix_files::Files;
-use actix_web::{middleware, App, HttpServer, web, get, HttpRequest};
+use actix_web::{middleware, App, HttpServer, get, HttpRequest, Responder, web};
 use serde::Serialize;
 
 #[actix_web::main]
@@ -28,7 +28,7 @@ struct FileList {
 }
 
 #[get("/mp3_files")]
-async fn mp3_filenames(req: HttpRequest) -> String {
+async fn mp3_filenames(req: HttpRequest) -> impl Responder {
     let mut file_names = Vec::new();
 
     for entry in fs::read_dir("./static/mp3").unwrap() {
@@ -37,5 +37,7 @@ async fn mp3_filenames(req: HttpRequest) -> String {
         file_names.push(f);
     }
     println!("REQ: {:?}", req);
-    format!("{:?}", file_names.join(";"))
+    // format!("{:?}", file_names.join(";"))
+    let obj = FileList { file_names };
+    web::Json(obj)
 }

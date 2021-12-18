@@ -1,5 +1,12 @@
 use std::fs;
 use actix_web::client::Client;
+use actix_web::web::Json;
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug)]
+struct FileList {
+    file_names: Vec<String>
+}
 
 #[actix_web::main]
 async fn main() {
@@ -14,7 +21,8 @@ async fn main() {
         .send()
         .await;
 
-    let body = response.unwrap().body().await.unwrap();
+    // let body = response.unwrap().body().await.unwrap();
+    let body: Json<FileList> = response.unwrap().json();
     let body_str = format!("{:?}", body);
     println!("Response: {:?}", body_str);
 
