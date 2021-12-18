@@ -1,0 +1,34 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:media="http://www.rssboard.org/media-rss"
+     version="2.0">
+    <channel>
+        <title>TwoWaySix RSS Feed</title>
+        <link>https://PODCAST URL.com/</link>
+        <language>en-us</language>
+        <atom:link href="{host_url}/rss/feed.xml" rel="self" type="application/rss+xml"/>
+        <copyright>TwoWaySix</copyright>
+        <itunes:subtitle>Self hosted RSS feed</itunes:subtitle>
+        <itunes:author>Paz Vi</itunes:author>
+        <itunes:summary>
+            A nice RSS feed.
+        </itunes:summary>
+        <itunes:keywords>
+            selfhosted
+        </itunes:keywords>
+        <description>
+            A description of the podcast.
+        </description>
+        <itunes:owner>
+            <itunes:name>Paz Vi</itunes:name>
+            <itunes:email>paz@twowaysix.com</itunes:email>
+        </itunes:owner>
+        <itunes:image href="{logo_url}"/>
+        <itunes:category text="CATEGORY1">Cat1</itunes:category>
+        <itunes:category text="CATEGORY2">Cat2</itunes:category>
+        <itunes:category text="CATEGORY3">Cat3</itunes:category>
+
+        {items}
+
+    </channel>
+</rss>
