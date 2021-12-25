@@ -19,8 +19,9 @@ async fn main() {
     let feed_template_path = "./templates/feed_template.xml".to_string();
     let host_url = "http://192.168.178.103:8765".to_string();
 
-
     let mut client = Client::default();
+
+    // TODO: Do proper error handling
     let payload =
         client
             .get(format!("{}/api/mp3", host_url))
