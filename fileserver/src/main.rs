@@ -17,7 +17,7 @@ async fn main() -> std::io::Result<()> {
             .service(mp3_filenames)
             .service(Files::new("/", "./static/root/").index_file("index.html"))
     })
-    .bind("192.168.178.10:8765")?
+    .bind("192.168.178.103:8765")?
     .run()
     .await
 }
@@ -27,7 +27,7 @@ struct FileList {
     file_names: Vec<String>
 }
 
-#[get("/mp3_files")]
+#[get("/api/mp3")]
 async fn mp3_filenames(req: HttpRequest) -> impl Responder {
     let mut file_names = Vec::new();
 

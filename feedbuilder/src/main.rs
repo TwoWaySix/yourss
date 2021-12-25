@@ -1,7 +1,10 @@
 use std::fs;
+use std::fs::File;
 use actix_web::client::Client;
-use actix_web::web::Json;
+use actix_web::dev::JsonBody;
+use actix_web::web::{Json, Payload};
 use serde::{Serialize, Deserialize};
+use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Debug)]
 struct FileList {
@@ -11,20 +14,29 @@ struct FileList {
 #[actix_web::main]
 async fn main() {
     let feed_template_path = "./templates/feed_template.xml".to_string();
-    let host_url = "http://192.168.178.10:8765".to_string();
+    let host_url = "http://192.168.178.103:8765".to_string();
 
     let rss_feed = create_rss_feed(&host_url, &feed_template_path);
 
     let mut client = Client::default();
-    let response = client.get(format!("{}/mp3_files", host_url))
-        .header("User-Agent", "actix-web/3.0")
-        .send()
-        .await;
 
-    // let body = response.unwrap().body().await.unwrap();
-    let body: Json<FileList> = response.unwrap().json();
-    let body_str = format!("{:?}", body);
-    println!("Response: {:?}", body_str);
+    let payload =
+        client
+            .get(format!("{}/api/mp3", host_url))
+            .send()
+            .await
+            .unwrap()
+            .body()
+            .limit(20_000_000)  // sets max allowable payload size
+            .await
+            .unwrap();
+
+    println!("\n\nResponse: {:?}", payload);
+
+    let obj = serde_json::from_slice::<FileList>(&payload).unwrap();
+
+    println!("Response: {:?}", obj);
+
 
     // TODO: Replace previous feed.xml
 }
