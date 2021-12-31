@@ -94,7 +94,7 @@ fn create_feed_items(host_url: &str, file_list: &FileList) -> String {
 
 fn create_feed_item(host_url: &str, file_name: &str) -> String {
     let episode_url = format!("{}/mp3/{}", host_url, file_name);
-    let path = format!("/Users/circe/Programming/yourss/fileserver/static/mp3/{}", file_name);
+    let path = format!("/Users/circe/Programming/yourss/static/mp3/{}", file_name);
     println!("{:?}", path);
     let duration = (mp3_duration::from_path(PathBuf::from(&path)).unwrap().as_millis() as f32) / 1000.;
 
