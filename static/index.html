@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy"
+          content="connect-src 'self' http://192.168.178.103:8881/update/feed;">
+    <title>YouRSS - Self Hosted Podcast Feed Creator</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>YouRSS</h1>
+        <form>
+            <label>Video ID:</label><br>
+            <input type="text">
+        </form>
+        <br>
+        <button id="btn-download" class="btn-primary">Download</button>
+        <button id="btn-refreshfeed" class="btn-success">Refresh Feed</button>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+
+</body>
+</html>
