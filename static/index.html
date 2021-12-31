@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy"
-          content="connect-src 'self' http://192.168.178.103:8881/update/feed;">
     <title>YouRSS - Self Hosted Podcast Feed Creator</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -16,7 +14,7 @@
         <h1>YouRSS</h1>
         <form>
             <label>Video ID:</label><br>
-            <input type="text">
+            <input type="text" id="vid-id">
         </form>
         <br>
         <button id="btn-download" class="btn-primary">Download</button>

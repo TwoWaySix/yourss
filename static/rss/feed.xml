@@ -6,7 +6,7 @@
         <title>TwoWaySix RSS Feed</title>
         <link>https://PODCAST URL.com/</link>
         <language>en-us</language>
-        <atom:link href="http://192.168.178.103:8881/rss/feed.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http://192.168.178.103:8880/rss/feed.xml" rel="self" type="application/rss+xml"/>
         <copyright>TwoWaySix</copyright>
         <itunes:subtitle>Self hosted RSS feed</itunes:subtitle>
         <itunes:author>Paz Vi</itunes:author>
@@ -23,7 +23,7 @@
             <itunes:name>Paz Vi</itunes:name>
             <itunes:email>paz@twowaysix.com</itunes:email>
         </itunes:owner>
-        <itunes:image href="http://192.168.178.103:8881/images/logo.png"/>
+        <itunes:image href="http://192.168.178.103:8880/images/logo.png"/>
         <itunes:category text="CATEGORY1">Cat1</itunes:category>
         <itunes:category text="CATEGORY2">Cat2</itunes:category>
         <itunes:category text="CATEGORY3">Cat3</itunes:category>
@@ -47,9 +47,9 @@
             <description>
                 DESCRIPTION
             </description>
-            <itunes:image href="http://192.168.178.103:8881/jpg/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.jpg"/>
+            <itunes:image href="http://192.168.178.103:8880/jpg/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.jpg"/>
             <enclosure
-                url="http://192.168.178.103:8881/mp3/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.mp3"
+                url="http://192.168.178.103:8880/mp3/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.mp3"
                 length="269.609"
                 type="audio/mpeg"
             />
@@ -66,7 +66,7 @@
                 full
             </itunes:episodeType>
             <guid isPermaLink="false">
-                http://192.168.178.103:8881/mp3/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.mp3
+                http://192.168.178.103:8880/mp3/Radiohead - If You Say The Word (Official Video)-vnhKaCjCIqM.mp3
             </guid>
             <pubDate>
                 EPISODE PUBLISH DATE
@@ -94,9 +94,9 @@
             <description>
                 DESCRIPTION
             </description>
-            <itunes:image href="http://192.168.178.103:8881/jpg/Radiohead - No Surprises-u5CVsCnxyXg.jpg"/>
+            <itunes:image href="http://192.168.178.103:8880/jpg/Radiohead - No Surprises-u5CVsCnxyXg.jpg"/>
             <enclosure
-                url="http://192.168.178.103:8881/mp3/Radiohead - No Surprises-u5CVsCnxyXg.mp3"
+                url="http://192.168.178.103:8880/mp3/Radiohead - No Surprises-u5CVsCnxyXg.mp3"
                 length="227.16"
                 type="audio/mpeg"
             />
@@ -113,7 +113,7 @@
                 full
             </itunes:episodeType>
             <guid isPermaLink="false">
-                http://192.168.178.103:8881/mp3/Radiohead - No Surprises-u5CVsCnxyXg.mp3
+                http://192.168.178.103:8880/mp3/Radiohead - No Surprises-u5CVsCnxyXg.mp3
             </guid>
             <pubDate>
                 EPISODE PUBLISH DATE

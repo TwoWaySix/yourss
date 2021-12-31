@@ -5,7 +5,7 @@ use serde::Serialize;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("Starting YouRSS FileServer at 192.168.178.103:8881");
+    println!("Starting YouRSS FileServer at 192.168.178.103:8880");
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
             .service(mp3_filenames)
             .service(Files::new("/", "./static/root/").index_file("index.html"))
     })
-        .bind("192.168.178.103:8881")?
+        .bind("192.168.178.103:8880")?
         .run()
         .await
 }
