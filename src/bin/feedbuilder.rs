@@ -18,6 +18,8 @@ struct FileList {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    println!("Starting YouRSS FeedBuilder at 192.168.178.103:8880");
+
     HttpServer::new(|| App::new().service(index))
         .bind("192.168.178.103:8880")?
         .run()
@@ -66,7 +68,7 @@ fn create_rss_feed(host_url: &str, feed_template_path: &str, file_list: &FileLis
     let logo_path = format!("{}/images/logo.png", host_url);
 
     let template = fs::read_to_string(feed_template_path)
-            .expect("Something went wrong reading the file");
+        .expect("Something went wrong reading the file");
 
     let items = create_feed_items(&host_url, file_list);
 
@@ -144,10 +146,10 @@ fn create_feed_item(host_url: &str, file_name: &str) -> String {
                 NO
             </itunes:explicit>
         </item>",
-         title=file_name,
-         episode_url=episode_url,
-         image_url=episode_url.replace("mp3", "jpg"),
-         duration=duration
+        title=file_name,
+        episode_url=episode_url,
+        image_url=episode_url.replace("mp3", "jpg"),
+        duration=duration
     );
     item
 }

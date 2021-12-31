@@ -14,3 +14,11 @@ Cargo.lock
 
 /target
 /tmp
+/build
+*.mp3
+
+# Added by cargo
+#
+# already existing elements were commented out
+
+#/target

@@ -2,7 +2,7 @@ use std::process::Command;
 use actix_web::{get, web, App, HttpServer, Responder};
 
 #[get("/download/from/youtube/{url}")]
-async fn index(web::Path((url)): web::Path<(String)>) -> impl Responder {
+async fn index(web::Path(url): web::Path<String>) -> impl Responder {
     let url_full = format!("https://www.youtube.com/watch?v={}", url);
 
     println!("YouRSS - Downloader");
