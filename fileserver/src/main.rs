@@ -17,7 +17,7 @@ async fn main() -> std::io::Result<()> {
             .service(mp3_filenames)
             .service(Files::new("/", "./static/root/").index_file("index.html"))
     })
-    .bind("192.168.178.103:8765")?
+    .bind("192.168.178.103:8881")?
     .run()
     .await
 }
@@ -34,6 +34,7 @@ async fn mp3_filenames(req: HttpRequest) -> impl Responder {
     for entry in fs::read_dir("./static/mp3").unwrap() {
         let dir = entry.unwrap();
         let f = format!("{}", dir.path().file_name().unwrap().to_str().unwrap());
+        println!("{}", f);
         file_names.push(f);
     }
     println!("REQ: {:?}", req);

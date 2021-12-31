@@ -6,6 +6,7 @@ use std::path::PathBuf;
 use actix_web::client::Client;
 use actix_web::dev::JsonBody;
 use actix_web::web::{Json, Path, Payload};
+use actix_web::{get, web, App, HttpServer, Responder};
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 use mp3_duration;
@@ -16,9 +17,19 @@ struct FileList {
 }
 
 #[actix_web::main]
-async fn main() {
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| App::new().service(index))
+        .bind("192.168.178.103:8880")?
+        .run()
+        .await
+}
+
+#[get("/update/feed")]
+async fn index() -> impl Responder {
+    println!("Updating feed...");
+
     let feed_template_path = "./templates/feed_template.xml".to_string();
-    let host_url = "http://192.168.178.103:8765".to_string();
+    let host_url = "http://192.168.178.103:8881".to_string();
 
     let mut client = Client::default();
 
@@ -42,6 +53,8 @@ async fn main() {
 
     let path = PathBuf::from("./static/rss/feed.xml");
     write_feed(&path, &rss_feed);
+
+    format!("Finished updating feed.xml")
 }
 
 fn create_enclosed_tag(tag: &str, child: &str) -> String {
@@ -79,7 +92,7 @@ fn create_feed_items(host_url: &str, file_list: &FileList) -> String {
 
 fn create_feed_item(host_url: &str, file_name: &str) -> String {
     let episode_url = format!("{}/mp3/{}", host_url, file_name);
-    let path = format!("/Users/circe/Programming/yourrs/fileserver/static/mp3/{}", file_name);
+    let path = format!("/Users/circe/Programming/yourss/fileserver/static/mp3/{}", file_name);
     println!("{:?}", path);
     let duration = (mp3_duration::from_path(PathBuf::from(&path)).unwrap().as_millis() as f32) / 1000.;
 
