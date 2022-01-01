@@ -1,18 +1,5 @@
 #!/bin/bash
 
-# User variables
-export YOURSS_IP="127.0.0.1"
-export YOURSS_FILESERVER_PORT="8880"
-export YOURSS_FEEDBUILDER_PORT="8881"
-export YOURSS_DOWNLOADER_PORT="8882"
-export YOURSS_FRONTEND_PORT="8883"
-
-# Handling all the addresses
-export YOURSS_FILESERVER="$YOURSS_IP:$YOURSS_FILESERVER_PORT"
-export YOURSS_FEEDBUILDER="$YOURSS_IP:$YOURSS_FEEDBUILDER_PORT"
-export YOURSS_DOWNLOADER="$YOURSS_IP:$YOURSS_DOWNLOADER_PORT"
-export YOURSS_FRONTEND="$YOURSS_IP:$YOURSS_FRONTEND_PORT"
-
 # Creating directories and copying files
 mkdir build
 mkdir build/static
@@ -41,6 +28,9 @@ cp ./target/release/fileserver ./build/yourss-fileserver
 # Compiling and copying yourss-frontend
 cargo build --release --bin frontend
 cp ./target/release/frontend ./build/yourss-frontend
+
+# Copying the run script
+cp ./templates/start_yourss.sh ./build/
 
 # TODO: Dockerize the result!
 
