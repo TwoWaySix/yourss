@@ -19,6 +19,8 @@ async fn main() -> std::io::Result<()> {
         None => panic!("$YOURSS_FRONTEND is not set")
     };
 
+    println!("Starting YouRSS Frontend at {}.", ip_address);
+
     HttpServer::new(|| {
         let cors = Cors::default()
             .supports_credentials();

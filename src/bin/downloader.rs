@@ -20,6 +20,8 @@ async fn main() -> std::io::Result<()> {
         None => panic!("$YOURSS_DOWNLOADER is not set")
     };
 
+    println!("Starting YouRSS Downloader at {}.", ip_address);
+
     HttpServer::new(|| App::new().service(index))
         .bind(ip_address)?
         .run()
