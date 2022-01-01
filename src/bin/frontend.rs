@@ -14,6 +14,11 @@ async fn index(req: HttpRequest) -> Result<NamedFile> {
 async fn main() -> std::io::Result<()> {
     use actix_web::{web, App, HttpServer};
 
+    let ip_address = match std::env::var_os("YOURSS_FRONTEND") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_FRONTEND is not set")
+    };
+
     HttpServer::new(|| {
         let cors = Cors::default()
             .supports_credentials();
@@ -22,7 +27,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(cors)
             .route("/{filename:.*}", web::get().to(index))
     })
-    .bind("192.168.178.103:8883")?
+    .bind(ip_address)?
     .run()
     .await
 }

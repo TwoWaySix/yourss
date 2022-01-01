@@ -15,8 +15,13 @@ async fn index(web::Path(url): web::Path<String>) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let ip_address = match std::env::var_os("YOURSS_DOWNLOADER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_DOWNLOADER is not set")
+    };
+
     HttpServer::new(|| App::new().service(index))
-        .bind("192.168.178.103:8882")?
+        .bind(ip_address)?
         .run()
         .await
 }

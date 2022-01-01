@@ -5,10 +5,15 @@ use serde::Serialize;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("Starting YouRSS FileServer at 192.168.178.103:8880");
+    let ip_address = match std::env::var_os("YOURSS_FILESERVER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_FILESERVER is not set")
+    };
+
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
+    println!("Starting YouRSS FileServer at {}", ip_address);
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Logger::default())
@@ -18,7 +23,7 @@ async fn main() -> std::io::Result<()> {
             .service(mp3_filenames)
             .service(Files::new("/", "./static/root/").index_file("index.html"))
     })
-        .bind("192.168.178.103:8880")?
+        .bind(ip_address)?
         .run()
         .await
 }

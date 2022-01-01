@@ -18,10 +18,14 @@ struct FileList {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("Starting YouRSS FeedBuilder at 192.168.178.103:8881");
+    let ip_address = match std::env::var_os("YOURSS_FEEDBUILDER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_FEEDBUILDER is not set")
+    };
+    println!("Starting YouRSS FeedBuilder at {}.", ip_address);
 
     HttpServer::new(|| App::new().service(index))
-        .bind("192.168.178.103:8881")?
+        .bind(ip_address)?
         .run()
         .await
 }
@@ -31,7 +35,11 @@ async fn index() -> impl Responder {
     println!("Updating feed...");
 
     let feed_template_path = "./templates/feed_template.xml".to_string();
-    let host_url = "http://192.168.178.103:8880".to_string();
+    let ip_address = match std::env::var_os("YOURSS_FILESERVER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_FILESERVER is not set")
+    };
+    let host_url = format!("http://{}", ip_address);
 
     let mut client = Client::default();
 
