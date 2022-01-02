@@ -1,23 +1,36 @@
 use std::process::Command;
 use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::client::Client;
 
-#[get("/download/from/youtube/{url}")]
-async fn index(web::Path(url): web::Path<String>) -> impl Responder {
-    let url_full = format!("https://www.youtube.com/watch?v={}", url);
+#[get("/download/from/youtube/{video_id}")]
+async fn index(web::Path(video_id): web::Path<String>) -> impl Responder {
+    let url = format!("https://www.youtube.com/watch?v={}", video_id);
 
-    println!("YouRSS - Downloader");
-    println!("Trying to download audio from following URL: {}", url_full);
-    let stdout = download_from_url(&url_full);
+    println!("Trying to download audio from following URL: {}", url);
+    let stdout = download_from_url(&url);
     println!("Download finished or failed.");
 
-    format!("Download finished from : {} \n {}", url_full, stdout)
+    // Updating the feed
+    let feedbuilder_ip = match std::env::var_os("YOURSS_FEEDBUILDER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_FEEDBUILDER is not set. Please set it to the ip address and port.")
+    };
+    let req = format!("http://{}/update/feed", feedbuilder_ip);
+    println!("Rebuilding feed by calling: {}", req);
+    let mut client = Client::default();
+    let payload = client.get(req)
+            .send()
+            .await
+            .unwrap();
+
+    format!("Download finished from : {} \n {}", url, stdout)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let ip_address = match std::env::var_os("YOURSS_DOWNLOADER") {
         Some(v) => v.into_string().unwrap(),
-        None => panic!("$YOURSS_DOWNLOADER is not set")
+        None => panic!("$YOURSS_DOWNLOADER is not set. Please set it to the ip address and port.")
     };
 
     println!("Starting YouRSS Downloader at {}.", ip_address);

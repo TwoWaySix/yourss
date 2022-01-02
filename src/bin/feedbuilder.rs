@@ -44,8 +44,7 @@ async fn index() -> impl Responder {
     let mut client = Client::default();
 
     // TODO: Do proper error handling
-    let payload =
-        client
+    let payload = client
             .get(format!("{}/api/mp3", host_url))
             .send()
             .await
@@ -84,8 +83,6 @@ fn create_rss_feed(host_url: &str, feed_template_path: &str, file_list: &FileLis
         .replace("{logo_url}", &logo_path)
         .replace("{items}", &items);
 
-    println!("{}", feed);
-
     feed
 }
 
@@ -101,13 +98,12 @@ fn create_feed_items(host_url: &str, file_list: &FileList) -> String {
 
 fn create_feed_item(host_url: &str, file_name: &str) -> String {
     let episode_url = format!("{}/mp3/{}", host_url, file_name);
-    // let path = format!("/Users/circe/Programming/yourss/static/mp3/{}", file_name);
+
     let path = format!("./static/mp3/{}", file_name);
     let path = PathBuf::from(&path);
 
     let mut duration: f32 = 999.;
     if path.exists() {
-        println!("{:?}", path);
         duration = (
             mp3_duration::from_path(path)
                 .unwrap()
