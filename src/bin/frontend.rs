@@ -19,8 +19,9 @@ async fn main() -> std::io::Result<()> {
         None => panic!("$YOURSS_FRONTEND is not set")
     };
 
-    println!("Starting YouRSS Frontend at {}.", ip_address);
+    // TODO: Get yourss-downloader ip from env and writing it into the index.js
 
+    println!("Starting YouRSS Frontend at {}.", ip_address);
     HttpServer::new(|| {
         let cors = Cors::default()
             .supports_credentials();
