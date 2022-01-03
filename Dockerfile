@@ -3,7 +3,7 @@ FROM rust AS builder
 WORKDIR /usr/src/
 RUN rustup target add x86_64-unknown-linux-musl
 
-RUN USER=root cargo new deciduously-com
+RUN USER=root cargo new yourss
 WORKDIR /usr/src/yourss
 COPY Cargo.toml Cargo.lock ./
 RUN cargo build --release
