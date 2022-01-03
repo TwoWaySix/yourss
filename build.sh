@@ -13,20 +13,13 @@ cp -a static/js build/static/
 cp -a static/images build/static/
 cp -a templates build/
 
-# Compiling and copying yourss-feedbuilder
-cargo build --release --bin feedbuilder
+# Building the binaries
+cargo build --release
+
+# Copying the binaries
 cp ./target/release/feedbuilder ./build/yourss-feedbuilder
-
-# Compiling and copying yourss-downloader
-cargo build --release --bin downloader
 cp ./target/release/downloader ./build/yourss-downloader
-
-# Compiling and copying yourss-fileserver
-cargo build --release --bin fileserver
 cp ./target/release/fileserver ./build/yourss-fileserver
-
-# Compiling and copying yourss-frontend
-cargo build --release --bin frontend
 cp ./target/release/frontend ./build/yourss-frontend
 
 # Copying the run script
