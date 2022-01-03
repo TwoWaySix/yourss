@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Download youtube-dl
+curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl
+chmod a+rx ./youtube-dl
+
 # User variables
 export YOURSS_IP="127.0.0.1"
 export YOURSS_FILESERVER_PORT="8880"

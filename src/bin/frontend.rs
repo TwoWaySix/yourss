@@ -1,3 +1,5 @@
+use std::fs::File;
+use std::io::prelude::*;
 use actix_files::NamedFile;
 use actix_web::{http, HttpRequest, Result};
 use std::path::PathBuf;
@@ -18,8 +20,12 @@ async fn main() -> std::io::Result<()> {
         Some(v) => v.into_string().unwrap(),
         None => panic!("$YOURSS_FRONTEND is not set")
     };
+    let ip_address_downloader = match std::env::var_os("YOURSS_DOWNLOADER") {
+        Some(v) => v.into_string().unwrap(),
+        None => panic!("$YOURSS_DOWNLOADER is not set")
+    };
 
-    // TODO: Get yourss-downloader ip from env and writing it into the index.js
+    change_ip_in_js_files(&ip_address_downloader);
 
     println!("Starting YouRSS Frontend at {}.", ip_address);
     HttpServer::new(|| {
@@ -33,4 +39,20 @@ async fn main() -> std::io::Result<()> {
     .bind(ip_address)?
     .run()
     .await
+}
+
+fn change_ip_in_js_files(ip_address: &str) -> std::io::Result<()> {
+    // Read javascript file
+    let mut file = File::open("./static/js/index.js")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+
+    // Changing ip address
+    contents.replace("localhost:8882", ip_address);
+
+    // Writing new javascript file
+    let mut file = File::create("./static/js/index.js")?;
+    file.write_all(contents.as_bytes());
+
+    Ok(())
 }
